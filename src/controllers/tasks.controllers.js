@@ -1,7 +1,6 @@
 const crlRouter = {}
 
-
-const Task = require('../models/schema')
+const Task = require('../models/TasksSchema')
 
 crlRouter.renderIndex=(req, res)=>{
         res.render('index.hbs')
@@ -12,8 +11,8 @@ crlRouter.renderForm=(req, res)=>{
 }
 
 crlRouter.renderTasks= async(req, res)=>{
-    const tasks = await Task.find().lean()
-    res.render('notes/tasks', {tasks})   
+    const tasks = await Task.find({userId: req.user.id}) 
+    res.render('notes/tasks', {tasks})
 }
 
 crlRouter.addTask=async (req, res)=>{
@@ -29,7 +28,6 @@ crlRouter.deleteTask = async(req, res)=>{
     const task = await Task.findByIdAndDelete(id)
     res.redirect('/tasks')
 }
-
 
 crlRouter.editeFormTask=async (req, res)=>{
     const {id} = req.params

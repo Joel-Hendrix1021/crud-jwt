@@ -1,20 +1,21 @@
 const {Router} = require('express');
 const router = Router()
 
-const {renderForm,renderTasks,deleteTask, addTask, editeFormTask, updateTask ,renderIndex} = require('../controllers/index.controllers')
+const {renderForm,renderTasks,deleteTask, addTask, editeFormTask, updateTask ,renderIndex} = require('../controllers/tasks.controllers')
+const verifyAuth  = require('../helpers/verifyAuth')
 
 router.get('/', renderIndex)
 
 router.get('/add', renderForm)
 
-router.get('/tasks', renderTasks)
+router.get('/tasks',verifyAuth, renderTasks)
 
-router.get('/delete/:id',deleteTask)
+router.get('/delete/:id',verifyAuth, deleteTask)
 
-router.post('/addTask', addTask)
+router.post('/addTask',verifyAuth, addTask)
 
-router.get('/edite/:id', editeFormTask)
+router.get('/edite/:id',verifyAuth, editeFormTask)
 
-router.post('/edite/updateTask/:id', updateTask)
+router.post('/edite/updateTask/:id',verifyAuth, updateTask)
 
 module.exports = router

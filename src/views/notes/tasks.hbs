@@ -1,20 +1,19 @@
  
 <div class="container">
-    <h1>tasks page</h1>
-   
+    <h4>tasks {{user.username}}</h4>
+   {{> messages}}
     <div class="d-flex flex-wrap ">
        {{#each tasks}}
        
          <div class="card border-secondary m-3 " style="min-width: 15rem;">
             <div class="card-header bg-dark text-white "></div>
             <div class="card-body text-secondary">
-              <h5 class="card-title">{{this.description}} </h5>
-              <p class="card-text"> {{title}}</p>
+              <h5 class="card-title">{{title}} </h5>
+              <p class="card-text"> {{description}}</p>
               <a href="edite/{{_id}}" class="btn btn-info">edite</a>
               <a href="delete/{{_id}} " class="btn btn-danger">delete</a>
             </div>
           </div>
-
        {{/each}}
     </div>
 </div>

@@ -5,7 +5,6 @@ const UserSchema = new Schema({
     email: String,
     username:String,
     password:String,
-
 })
 
 UserSchema.methods.encryptPassword= async(password) =>{
@@ -14,8 +13,9 @@ UserSchema.methods.encryptPassword= async(password) =>{
     return encryptPassword
 }
 
-UserSchema.methods.comparePassword= async function (password){
-    return await bcrypt.compare(this.password, password)
+UserSchema.methods.comparePassword = async (passwordCompare, password)=>{
+    
+    return await bcrypt.compare(passwordCompare, password)
 }
 
 module.exports = model('User', UserSchema)
