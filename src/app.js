@@ -1,6 +1,5 @@
 const express = require('express')
 const morgan = require('morgan')
-const {format} = require('timeago.js')
 const flash = require('connect-flash');
 const hbs = require('express-handlebars')
 const path = require('path')
@@ -23,7 +22,8 @@ app.engine('.hbs',hbs({
     handlebars: allowInsecurePrototypeAccess(handlebars),
     layoutsDir: path.join(__dirname, 'views/layout'),
     partialsDir: path.join(__dirname, 'views/partials'),
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: require('./helpers/help')
 }))
 app.set('view engine', 'hbs')
 
@@ -47,6 +47,7 @@ app.use( (req, res, next)=> {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error = req.flash('error');
     res.locals.user = req.user
+   
     next();
 });
 
